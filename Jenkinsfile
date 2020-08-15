@@ -24,7 +24,7 @@ pipeline {
       }
       stage('publish') {
          steps {
-			withDockerRegistry(credentialsId: '65adad77-7981-400f-922b-74cc6ba0c88e', url: 'https://index.docker.io/v1/') {
+			withDockerRegistry(credentialsId: '', url: 'https://index.docker.io/v1/') {
                      sh "/usr/bin/docker push chaitanyagaajula/cicd-example:latest"
          }
          }
