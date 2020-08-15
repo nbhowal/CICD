@@ -22,12 +22,15 @@ pipeline {
 
          }
       }
-      stage('publish') {
-         steps {
-			withDockerRegistry(credentialsId: '', url: 'https://index.docker.io/v1/') {
-                     sh "/usr/bin/docker push chaitanyagaajula/cicd-example:latest"
-         }
-         }
+      stage('Deploy Image') {
+      steps{
+        script {
+          docker.withRegistry( '', registryCredential ) {
+            dockerImage.push()
+	  }
+	}
+      }
+			
       }
       stage('Running_image_from_DockerHub') {
          steps {
