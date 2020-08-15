@@ -22,16 +22,15 @@ pipeline {
 
          }
       }
-      stage('Deploy Image') {
+      stage('publish') {
       steps{
-        script {
-          docker.withRegistry( 'chaitanyagaajula/hans@0613', registryCredential ) {
-            dockerImage.push()
+                  withDockerRegistry( credentialsId: '65adad77-7981-400f-922b-74cc6ba0c88e', url: 'https://index.docker.io/v1/') {
+            sh "usr/bin/docker/push chaitanyagaajula/cicd-example:latest"
 	  }
 	}
       }
 			
-      }
+      
       stage('Running_image_from_DockerHub') {
          steps {
 
